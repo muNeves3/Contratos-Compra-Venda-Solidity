@@ -77,9 +77,6 @@ contract ContratoSemErro {
         emit Notify(buyer, seller, "1. Comprador realizou a compra.");
     }
 
-    // Função unificada com recebimento de parâmetro ao invés de msg.value
-    // Não é possível utilizar dois modificadores juntos
-    // quando colocados juntos, os modificadores atuam como o operador lógico AND
     function payProduct(uint _amount) external {
         if (msg.sender == buyer && state == ContractState.ProductBought) {
             require(_amount == paymentAmount, "Valor do pagamento incorreto");
@@ -126,7 +123,6 @@ contract ContratoSemErro {
         );
     }
 
-    // Removido o payable, inserido o parâmetro _amount
     function payShippingCosts(uint _amount)
         external
         onlyS
@@ -204,7 +200,6 @@ contract ContratoSemErro {
         );
     }
 
-    // Adicionado parâmetro _amount e verificação
     function liberateShippingCosts(uint _amount)
         external
         onlyS
