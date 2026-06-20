@@ -78,7 +78,6 @@ contract ContratoComErro {
         emit Notify(buyer, seller, "1. Comprador realizou a compra.");
     }
 
-    // Função unificada com recebimento de parâmetro ao invés de msg.value
     function payProduct(uint _amount) external {
         if (msg.sender == buyer && state == ContractState.ProductBought) {
             require(_amount == paymentAmount, "Valor do pagamento incorreto.");
@@ -125,7 +124,6 @@ contract ContratoComErro {
         );
     }
 
-    // Removido o payable, inserido o parâmetro _amount
     function payShippingCosts(uint _amount)
         external
         onlyS
@@ -137,7 +135,6 @@ contract ContratoComErro {
         emit Notify(seller, bank, "7. Vendedor pagou o frete ao banco.");
     }
 
-    // Erro proposital de deadlock acadêmico mantido aqui nesta lógica
     function deliverProduct() external onlyC {
         require(productSent, "Produto ainda nao foi enviado pelo vendedor.");
 
@@ -187,7 +184,6 @@ contract ContratoComErro {
         );
     }
 
-    // Adicionado parâmetro _amount e verificação
     function liberateShippingCosts(uint _amount)
         external
         onlyS
